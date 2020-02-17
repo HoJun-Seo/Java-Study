@@ -1,2 +1,2 @@
 # Java-Study
-Just study for Java
+Java를 학습하기 위한 repository 입니다.
