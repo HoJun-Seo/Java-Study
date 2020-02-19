@@ -42,10 +42,10 @@ public class Quiz {
 		System.out.println("키 입력 : ");
 		height = Double.parseDouble(sc.nextLine());//double 자료형을 반환하는 함수(parseDouble)
 		
-		System.out.println("이름 :\t" + "\"" + name + "\"");
-		System.out.println("나이 :\t만 " + (age-1) + "살");
-		System.out.println("출생년도 :\t" + birth + "년");
-		System.out.printf("키 :\t%.2fcm", height);
+		System.out.println("이름\t:" + "\"" + name + "\"");
+		System.out.println("나이\t:만 " + (age-1) + "살");
+		System.out.println("출생년도\t:" + birth + "년");
+		System.out.printf("키\t:%.2fcm", height);
 		
 	}
 }
