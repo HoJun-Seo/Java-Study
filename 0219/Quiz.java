@@ -46,6 +46,6 @@ public class Quiz {
 		System.out.println("나이\t:만 " + (age-1) + "살");
 		System.out.println("출생년도\t:" + birth + "년");
 		System.out.printf("키\t:%.2fcm", height);
-		
+		sc.close(); //Scanner 는 사용하고 난 후 마지막에 닫아줘야 한다.
 	}
 }
