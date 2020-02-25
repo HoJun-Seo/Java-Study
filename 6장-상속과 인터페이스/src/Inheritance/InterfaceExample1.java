@@ -1,7 +1,7 @@
 package Inheritance;
 
 public class InterfaceExample1 {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		SeperateVolume obj1 = new SeperateVolume("863?774개", "개미", "베르베르");
 		AppCDInfo obj2 = new AppCDInfo("2005-7001", "Redhat Fedora");
 		obj1.checkOut("김영숙", "20060315");

@@ -7,11 +7,11 @@ public class AppCDInfo extends CDInfo implements Lendable{
 	AppCDInfo(String registerNo, String title) {
 		super(registerNo, title);
 	}
-	public void checkOut(String borrower, String date) {
-		if(state != 0) return;
+	public void checkOut(String borrower, String date) throws Exception {
+		if(state != STATE_NORMAL) throw new Exception("대출불가 : " + title);
 		this.borrower = borrower;
 		this.checkOutDate = date;
-		this.state = 1;
+		this.state = STATE_BORROWED;
 		System.out.println("*" + title + "CD가 대출되었습니다.");
 		System.out.println("대출인 : " + borrower);
 		System.out.println("대출일 : " + date + "\n");
