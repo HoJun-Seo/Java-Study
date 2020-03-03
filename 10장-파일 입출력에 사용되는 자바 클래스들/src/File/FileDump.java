@@ -1,5 +1,6 @@
 package File;
 
+import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,9 +11,10 @@ public class FileDump {
 			System.out.println("Usage : java FileDump <filename>");
 			return;
 		}
-		FileInputStream in = null;
+		BufferedInputStream in = null;
+		//버퍼를 이용하여 입출력 성능을 향상 시킨다.
 		try {
-			in = new FileInputStream(args[0]); //파일을 연다.
+			in = new BufferedInputStream(new FileInputStream(args[0])); //파일을 연다.
 			byte arr[] = new byte[16];
 			while(true) {
 				int num = in.read(arr); //파일로부터 16바이트를 읽는다.
