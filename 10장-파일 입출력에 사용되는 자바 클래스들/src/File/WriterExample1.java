@@ -1,13 +1,14 @@
 package File;
 
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriterExample1 {
 	public static void main(String[] args) {
-		FileWriter writer = null;
+		BufferedWriter writer = null;
 		try {
-			writer = new FileWriter("output.txt");
+			writer = new BufferedWriter(new FileWriter("output.txt"));
 			char arr[] = {'뇌', '를', ' ', '자', '극', '하', '는', ' ', 'J', 'a', 'v', 'a'};
 			for(int cnt = 0; cnt < arr.length; cnt++)
 				writer.write(arr[cnt]);
