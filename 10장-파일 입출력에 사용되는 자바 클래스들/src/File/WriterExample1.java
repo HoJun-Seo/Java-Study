@@ -7,6 +7,18 @@ import java.io.IOException;
 public class WriterExample1 {
 	public static void main(String[] args) {
 		BufferedWriter writer = null;
+		/* 문자 출력 스트림의 성능을 향상 시키는 클래스 - 파일 출력의 성능을 향상 시키려면 FileWriter 객체를 생성하여 
+		 * 생성자 파라미터로 넘겨줘야 한다.
+		 * write method 를 이용해서 데이터를 출력할 수 있는데, 호출할 때 마다 파일에 데이터를 쓰는 것이 아니라 
+		 * BufferedWriter 객체 내부에 있는 버퍼에 데이터를 모아두었다가 버퍼가 꽉 차면 한꺼번에 출력하기 때문에
+		 * 잦은 보조 기억장치 접근으로 인한 프로그램의 성능 저하를 막을 수 있다.
+		 * 이 클래스는 버퍼가 다 차기 전까지는 파일에 실제로 데이터를 쓰지 않기 때문에, 한 프로그램이 파일에 데이터를 쓰는 동안 
+		 * 다른 프로그램이 그 파일의 내용을 사용하려고 하면 문제가 될 수 있다.
+		 * 그럴때는 BufferedWriter class 의 flush method 를 이용하면 된다.
+		 * 이 메소드는 호출되는 즉시 버퍼에 있는 데이터를 모드 파일에 쓰고 나서 버퍼를 비우는 메소드이다.
+		 * 이 메소드는 파라미터도 받지 않고, 리턴 값도 없기 때문에 아래와 같은 방법으로 호출 할 수 있다.
+		 * writer.flush(); -> 호출되는 즉시 버퍼의 데이터를 모두 출력하는 메소드.
+		 */
 		try {
 			writer = new BufferedWriter(new FileWriter("output.txt"));
 			char arr[] = {'뇌', '를', ' ', '자', '극', '하', '는', ' ', 'J', 'a', 'v', 'a'};
