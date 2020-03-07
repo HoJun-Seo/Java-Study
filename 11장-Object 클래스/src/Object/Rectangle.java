@@ -27,4 +27,7 @@ public class Rectangle implements Cloneable{ //implements 키워드를 이용하
 		 * Object class 의 clone method 는 CloneNotSupportedException 을 발생 할 수 있으므로 try - catch 문으로 묶어서 작성한다.
 		 */
 	}
+	int getArea() {
+		return width * height;
+	}
 }
