@@ -21,3 +21,18 @@ public class WrapperExample1 {
 		System.out.println(sum);
 	}
 }
+/*
+ * 래퍼 클래스에는 생성자를 대신하여 사용할 수 있는 valueOf method 가 있다.
+ * 이 메소드에 래퍼 클래스의 생성자 파라미터에 해당하는 값을 넘겨주면, 그에 해당하는 래퍼 객체가 리턴된다.(Wrapper class 의 생성자를 대신하는 메소드)
+ * Byte obj1 = Byte.valueOf((byte)1);
+ * Short obj2 = Short.valueOf((short)123);
+ * Integer obj3 = Integer.valueOf(12345);
+ * Long obj4 = Long.valueOf(1234567890L);
+ * Float obj5 = Float.valueOf(1.5f);
+ * Double obj6 = Double.valueOf(1.00005);
+ * Character obj7 = Character.valueOf('꽃');
+ * Boolean obj8 = Boolean.valueOf(true);
+ * 이 메소드의 기능은 겉으로는 생성자와 똑같으나, 이 메소드는 똑같은 파라미터 값을 두번 이상 넘겨주면 전에 만들어 두었던 래퍼 객체를 리턴하기 때문에 생성자와는 다르다.
+ * 똑같은 프리미티브 값을 가지고 valueOf method 를 여러 번 호출하면 같은 객체에 대한 참조값이 리턴된다.
+ * 그렇기 때문에 래퍼 객체를 많이 필요로 하는 프로그램에서 이 메소드를 사용하면 객체를 생성하는 시간과 객체가 차지하는 메모리를 절약할 수 있어 효율적이다.
+ */
