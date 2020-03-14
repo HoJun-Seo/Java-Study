@@ -1,5 +1,5 @@
 package Exception;
-//직접 만든 InvaildInpuyExceptin class 를 사용하는 클래스
+//직접 만든 InvaildInputException class 를 사용하는 클래스
 public class ExceptionExample11 {
 	public static void main(String[] args) {
 		try {
