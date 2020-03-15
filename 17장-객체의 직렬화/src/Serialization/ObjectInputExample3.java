@@ -9,6 +9,7 @@ import java.io.ObjectInputStream;
  * BBSItem 객체를 역직렬화 하는 프로그램
  * 직렬화하기 전에는 1과 "sunshine" 이라는 값을 갖고 있던 itemNum 필드와 transient 필드가 역직렬화 후에는 0과 null 이라는 값을 가지고 있다.
  * 이것은 두 필드가 직렬화 대상에서 제외 되었기 때문이며, 두 필드의 값은 직렬화 되지도 않고, 역직렬화 되지도 않았다.
+ * 직렬화 가능 클래스는 정적 필드와 transient 필드를 제외한 모든 필드들을 직렬화 한다. - 디폴트 직렬화 메커니즘
  */
 public class ObjectInputExample3 {
 	public static void main(String[] args) {
