@@ -28,6 +28,7 @@ public class WindowExample7 {
 		JScrollPane scrollPane = new JScrollPane(table);
 		contentPane.add(scrollPane, BorderLayout.CENTER); //스크롤 판을 content pane 에 추가한다.
 		JButton button = new JButton("출력");
+		button.addActionListener(new PrintActionListener(table));
 		contentPane.add(button, BorderLayout.SOUTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
