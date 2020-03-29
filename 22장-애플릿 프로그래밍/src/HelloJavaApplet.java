@@ -41,4 +41,6 @@ public class HelloJavaApplet extends JApplet{
  * 애플릿은 독자적으로는 웹 브라우저 안에서 실행 될 수 없고, 반드시 HTML 문서의 일부로서 실행되어야 한다.
  * 그렇기 때문에 이 애플릿을 HTML 문서의 일부로 만들어야 한다.
  * HTML 문서에 애플릿을 포함 시키는 일은 APPLET 태그를 사용해서 할 수 있다.
+ * 아파치 웹 서버에 애플릿을 설치하려면, 애플릿의 클래스 파일과 HTML 문서를 document directory(웹 서버를 통해 제공되는 HTML 문서 등을 저장하는 디렉토리)에 복사해 놓기만 하면 된다.
+ * 아파치 웹 서버의 document directory 는 htdocs 디렉토리 이니까 이 디렉토리에 앞에서 만든 애플릿과 HTML 문서를 복사한다.
  */
