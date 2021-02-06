@@ -23,8 +23,8 @@ public class Generic {
 @Getter
 @Setter
 class Human<T extends String>{
-	private String name;
-	private String phone;
+	private T name;
+	private T phone;
 	
 	@Override
 	public String toString() {
@@ -36,9 +36,9 @@ class Human<T extends String>{
 @Getter
 @Setter
 class Physical<T extends Number>{
-	private int age;
-	private double height;
-	private double weight;
+	private T age;
+	private T height;
+	private T weight;
 	
 	@Override
 	public String toString() {
