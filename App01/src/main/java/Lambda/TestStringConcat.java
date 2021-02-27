@@ -17,5 +17,4 @@ public class TestStringConcat {
 		StringConcat concat2 = (s,v) -> System.out.println(s + ", " + v);
 		concat2.makeString(s1, s2);
 	}
-
 }
