@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="150.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ex04.eventController">
+   <children>
+      <Button fx:id="btn1" layoutX="24.0" layoutY="24.0" mnemonicParsing="false" text="버튼1" />
+      <Button fx:id="btn2" layoutX="124.0" layoutY="24.0" mnemonicParsing="false" text="버튼2" />
+      <Button fx:id="btn3" layoutX="226.0" layoutY="24.0" mnemonicParsing="false" text="버튼3" />
+      <TextField fx:id="txt1" layoutX="24.0" layoutY="63.0" text="초기상태" />
+   </children>
+</AnchorPane>
