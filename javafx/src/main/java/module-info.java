@@ -4,13 +4,16 @@ module javafx {
 	exports ex03;
 	exports ex04;
 	exports ex05;
+	exports ex06;
 
 	//모듈 내에 패키지 접근 허용
 	requires javafx.graphics;
 	requires javafx.controls;
 	requires javafx.fxml;
 	requires java.desktop;
+	requires javafx.base;
 	
 	//모듈 내에 패키지에 있는 클래스 접근
 	opens ex04;
+	opens ex06;
 }
