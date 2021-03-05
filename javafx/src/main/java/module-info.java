@@ -12,8 +12,11 @@ module javafx {
 	requires javafx.fxml;
 	requires java.desktop;
 	requires javafx.base;
+	requires lombok;
 	
 	//모듈 내에 패키지에 있는 클래스 접근
 	opens ex04;
 	opens ex06;
+	opens ex06.dto;
+	opens ex06.controller;
 }

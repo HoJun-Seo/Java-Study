@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="484.0" prefWidth="487.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ex06.controller.tableViewController">
+   <children>
+      <TableView fx:id="textView" layoutX="22.0" layoutY="47.0" prefHeight="228.0" prefWidth="451.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="품목 번호" />
+          <TableColumn prefWidth="75.0" text="품목 명" />
+            <TableColumn prefWidth="75.0" text="단가" />
+            <TableColumn prefWidth="75.0" text="버튼" />
+            <TableColumn prefWidth="75.0" text="선택" />
+            <TableColumn prefWidth="75.0" text="콤보" />
+        </columns>
+      </TableView>
+      <TextArea fx:id="textArea" layoutX="22.0" layoutY="285.0" prefHeight="174.0" prefWidth="451.0" />
+   </children>
+</AnchorPane>
