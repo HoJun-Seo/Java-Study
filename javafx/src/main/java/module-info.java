@@ -13,6 +13,7 @@ module javafx {
 	requires java.desktop;
 	requires javafx.base;
 	requires lombok;
+	requires javafx.media;
 	
 	//모듈 내에 패키지에 있는 클래스 접근
 	opens ex04;

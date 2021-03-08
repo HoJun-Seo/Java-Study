@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+
+<BorderPane prefHeight="234.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ex06.controller.mediaController">
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="imageView" fitHeight="201.0" fitWidth="307.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../media/david-baylis-final3.jpg" />
+               </image>
+            </ImageView>
+            <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" />
+         </children>
+      </StackPane>
+   </center>
+   <right>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="243.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnPlay" mnemonicParsing="false" prefHeight="22.0" prefWidth="106.0" text="재생">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btnPause" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="일시정지">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btnStop" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" text="종료">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="2.0" layoutY="6.0" text="시간" />
+                  <Label layoutX="2.0" layoutY="59.0" text="소리" />
+                  <ProgressBar fx:id="progressBar" layoutX="2.0" layoutY="23.0" prefWidth="200.0" progress="0.0" />
+                  <ProgressIndicator fx:id="progressBarIndicator" layoutX="208.0" layoutY="12.0" progress="0.0" />
+                  <Label fx:id="labelTime" layoutX="88.0" layoutY="39.0" text="0/0 sec" />
+                  <Slider fx:id="sliderVolumn" layoutX="7.0" layoutY="83.0" prefHeight="14.0" prefWidth="193.0" showTickLabels="true" showTickMarks="true" />
+               </children>
+            </AnchorPane>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" />
+         </padding>
+      </VBox>
+   </right>
+</BorderPane>
