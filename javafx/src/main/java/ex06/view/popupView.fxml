@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox alignment="CENTER" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="imgView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <image> 
+            <Image url="@../images/dialog-help.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblMessage" prefHeight="75.0" prefWidth="66.0" style="-fx-text-fill: red; -fx-font-size: 19;" text="메세지" />
+   </children>
+</HBox>

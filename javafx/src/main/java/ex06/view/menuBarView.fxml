@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.effect.ImageInput?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ex06.controller.menuBarController">
+   <top>
+      <VBox prefHeight="43.0" prefWidth="357.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="파일">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#newAction" text="새 파일">
+                           <accelerator>
+                              <KeyCodeCombination alt="DOWN" code="N" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#openAction" text="불러오기">
+                           <accelerator>
+                              <KeyCodeCombination alt="DOWN" code="O" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#saveAction" text="저장하기">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#closeAction" text="닫기">
+                           <accelerator>
+                              <KeyCodeCombination alt="DOWN" code="X" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="편집">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="도움말">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <ToolBar prefHeight="40.0" prefWidth="200.0">
+              <items>
+                <Button fx:id="btnNew" mnemonicParsing="false" prefWidth="30.0" text="Button">
+                     <effect>
+                        <ImageInput>
+                           <source>
+                              <Image url="file:/C:/Users/tnrdu/Documents/GitHub/Java-Study/javafx/src/main/java/ex06/controller/icons/new.png" />
+                           </source>
+                        </ImageInput>
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="btnOpen" mnemonicParsing="false" prefWidth="30.0" text="Button">
+                     <effect>
+                        <ImageInput>
+                           <source>
+                              <Image url="file:/C:/Users/tnrdu/Documents/GitHub/Java-Study/javafx/src/main/java/ex06/controller/icons/open.png" />
+                           </source>
+                        </ImageInput>
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="btnSave" mnemonicParsing="false" prefWidth="30.0" text="Button">
+                     <effect>
+                        <ImageInput>
+                           <source>
+                              <Image url="file:/C:/Users/tnrdu/Documents/GitHub/Java-Study/javafx/src/main/java/ex06/controller/icons/save.png" />
+                           </source>
+                        </ImageInput>
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <MenuButton mnemonicParsing="false" text="선택">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="공개" />
+                      <MenuItem mnemonicParsing="false" text="비공개" />
+                    </items>
+                  </MenuButton>
+              </items>
+            </ToolBar>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <TextArea fx:id="txtArea" prefHeight="195.0" prefWidth="357.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
