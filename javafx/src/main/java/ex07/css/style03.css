@@ -1,0 +1,25 @@
+#vbox1{
+	-fx-border-color:red;
+	-fx-border-width:2;
+}
+#vbox2{
+	-fx-border-color:red;
+	-fx-border-width:2;
+	-fx-border-radius:30 0 30 0;
+}
+#vbox3{	
+	-fx-border-insets: 0, 10, 20;
+	-fx-border-color: red, green, blue;
+	-fx-border-width: 1, 2, 3;
+}
+#vbox4{
+	-fx-border-insets: 0, 10, 20;
+	-fx-border-color: red, green blue white black, blue;
+	-fx-border-width: 1, 2 3 6 8, 3;
+}
+#vbox5{
+	-fx-border-insets: 0, 10, 20;
+	-fx-border-color: red, green blue gray black, blue;
+	-fx-border-width: 1, 2 3 6 8, 3;
+	-fx-border-style: solid, solid dotted dashed segments(3,2,8,2), dashed;
+}

@@ -1,0 +1,18 @@
+
+TextField:focused {
+	-fx-border-color:skyblue;
+	-fx-background-color:yellow;
+	-fx-border-width:5;
+}
+
+Button:hover{
+	-fx-border-color:red;
+	-fx-font-size:14;
+	-fx-background-color:orange;
+}
+
+Button:pressed{
+	-fx-border-color:skyblue;
+	-fx-background-color:black;
+	-fx-text-fill:white;
+}

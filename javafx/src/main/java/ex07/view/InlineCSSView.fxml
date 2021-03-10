@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefWidth="100.0" spacing="10.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label style="-fx-background-color : black; -fx-text-fill: yellow" text="스타일 적용01" />
+      <Label style="-fx-background-color: blue; -fx-text-fill: yellow; -fx-padding: 5;" text="스타일 적용02" />
+      <Label id="lbl01" style="-fx-background-color: red; -fx-text-fill: white; -fx-padding: 3;" text="스타일 적용03" />
+      <Label styleClass="a" text="스타일 적용04" />
+      <Button id="btnId" mnemonicParsing="false" text="버튼1" />
+      <Button id="btnOk" mnemonicParsing="false" text="버튼2" />
+      <Button id="btnCancel" mnemonicParsing="false" text="버튼3" />
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>

@@ -1,0 +1,14 @@
+#login_background{
+	-fx-background-image:url('../images/background.jpg');
+}
+#lbl{
+	-fx-text-fill:white;
+}
+#lbl_title{
+	-fx-font-size:24;
+	-fx-font-weight:bold;
+}
+#btn{
+	-fx-background-color:skyblue;
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 10,0,7,7);
+}

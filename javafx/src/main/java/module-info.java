@@ -5,6 +5,7 @@ module javafx {
 	exports ex04;
 	exports ex05;
 	exports ex06;
+	exports ex07;
 
 	//모듈 내에 패키지 접근 허용
 	requires javafx.graphics;
@@ -20,4 +21,5 @@ module javafx {
 	opens ex06;
 	opens ex06.dto;
 	opens ex06.controller;
+	opens ex07;
 }

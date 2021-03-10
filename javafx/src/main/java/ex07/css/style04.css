@@ -1,0 +1,40 @@
+#box1{
+	-fx-background-color:rgba(0,0,0,0.5);
+}
+#box2{
+	-fx-background-color: linear-gradient(to right, #000000, #ffffff);
+}
+#box3{
+	-fx-background-color: radial-gradient(center 25% 50%, radius 50%, #ffffff, #000000);
+}
+#box4{
+	-fx-border-color:skyblue;
+	-fx-background-image:url('../images/icon.gif');
+	-fx-background-repeat:repeat;
+	-fx-background-position:right bottom;
+}
+#box5{
+	-fx-border-color:skyblue;
+	-fx-background-image:url('../images/snow.jpg');
+	-fx-background-position:center;
+}
+#root{
+	-fx-font-size:24;
+}
+#txt1{
+	-fx-font-size:48;
+	-fx-text-fill:red;
+	-fx-font-family:"Arial Black";
+	-fx-font-weight:bold;
+	-fx-text-fill:linear-gradient(to bottom, blue, white);
+}
+#txt2{
+	-fx-font-size:12;
+}
+/*dropshadow(타입, 그림자 색상, radius, 흐림정도, 그림자x거리, 그림자y거리)*/
+#btn1{
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 10,0,7,7);
+}
+#btn2{
+	-fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.7), 10,0,5,5);
+}
