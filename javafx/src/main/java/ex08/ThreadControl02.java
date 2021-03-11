@@ -1,4 +1,4 @@
-package ex07;
+package ex08;
 
 import java.io.IOException;
 
@@ -8,16 +8,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class LoginForm extends Application {
-
+public class ThreadControl02 extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("view/loginView.fxml"));
-		Scene scene = new Scene(root );
-		
-		String urlStr = getClass().getResource("css/login.css").toExternalForm();
-		scene.getStylesheets().add(urlStr);
-		
+		Parent root = FXMLLoader.load(getClass().getResource("view/threadFxView02.fxml"));
+		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
