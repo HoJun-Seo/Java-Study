@@ -7,6 +7,7 @@ module javafx {
 	exports ex06;
 	exports ex07;
 	exports ex08;
+	exports javafx_practice;
 
 	//모듈 내에 패키지 접근 허용
 	requires javafx.graphics;
@@ -25,4 +26,6 @@ module javafx {
 	opens ex07;
 	opens ex08;
 	opens ex08.threadController;
+	opens javafx_practice;
+	opens javafx_practice.controller;
 }
