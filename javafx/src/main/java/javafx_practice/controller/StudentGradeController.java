@@ -4,10 +4,20 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx_practice.dto.StudentDTO;
 
 public class StudentGradeController implements Initializable{
+	@FXML private TableView<StudentDTO> gradeTable;
+	@FXML private TableColumn<StudentDTO, String> name;
+	@FXML private TableColumn<StudentDTO, String> average;
+	@FXML private TableColumn<StudentDTO, String> order;
+	@FXML private TableColumn<StudentDTO, String> grade;
+	@FXML private Button btnOK;
 	
 	ObservableList<StudentDTO> student_list;
 	
@@ -20,7 +30,6 @@ public class StudentGradeController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		
 	}
 
