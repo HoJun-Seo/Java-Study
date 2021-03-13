@@ -30,6 +30,7 @@ public class StudentController implements Initializable{
 	@FXML private TableColumn<StudentDTO, String> science;
 	@FXML private Button btnAdd;
 	@FXML private Button btnBar;
+	@FXML private Button btnGrade;
 	
 	ObservableList<StudentDTO> student_list = FXCollections.observableArrayList();
 
@@ -56,6 +57,14 @@ public class StudentController implements Initializable{
 			@Override
 			public void handle(ActionEvent event) {
 				handlebtnBar(event);
+			}
+		});
+		
+		btnGrade.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				handlebtnGrade(event);
 			}
 		});
 	}
@@ -88,6 +97,21 @@ public class StudentController implements Initializable{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	public void handlebtnGrade(ActionEvent event) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/javafx_practice/view/studentGradeView.fxml"));
+			Parent root = loader.load();
+			StudentGradeController controller = loader.getController();
+			controller.setStudent_list(student_list);
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.show();
+		}catch (IOException e) {
+			// TODO: handle exception
 		}
 	}
 }
