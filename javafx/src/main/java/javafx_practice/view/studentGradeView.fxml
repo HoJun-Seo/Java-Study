@@ -15,6 +15,7 @@
             <TableColumn fx:id="grade" prefWidth="77.0" text="등급" />
         </columns>
       </TableView>
-      <Button fx:id="btnOK" layoutX="137.0" layoutY="362.0" mnemonicParsing="false" text="확인" />
+      <Button fx:id="btnOK" layoutX="104.0" layoutY="361.0" mnemonicParsing="false" text="확인" />
+      <Button fx:id="btnPrint" layoutX="175.0" layoutY="361.0" mnemonicParsing="false" text="출력" />
    </children>
 </AnchorPane>

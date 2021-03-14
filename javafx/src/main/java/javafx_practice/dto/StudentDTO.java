@@ -1,7 +1,9 @@
 package javafx_practice.dto;
 
 import javafx.beans.property.StringProperty;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 public class StudentDTO {
 	
 	private StringProperty name;
