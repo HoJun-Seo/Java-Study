@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>학생 성적 입력</title>
+</head>
+<body>
+<!-- 컨택스트 패스 : 프로젝틋 식별자
+	서버에 요청 url : 컨텍스트 패스(프로젝트 명) + 가상 경로
+	예) 프로젝트명이 webApp01, 가상경로 요청받음 => "/test/test.do" 요청 받음
+	-->
+<!-- <% String ctxPath = request.getContextPath()> -->
+	<form action="student" method="post">
+		이름 : <input type="text" name="name"> <br>
+		국어 : <input type="number" name="korean" max=100 min=0> <br>
+		영어 : <input type="number" name="english" max=100 min=0> <br>
+		수학 : <input type="number" name="math" max=100 min=0> <br>
+		<input type="submit" value="총점 및 평균 출력">
+		<input type="reset" value="재입력">
+	</form>
+</body>
+</html>
