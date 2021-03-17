@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>BMI 지수 계산</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$('#btnOk').click(function () {
+			console.log("click...");
+			var name = $('#name').val();
+			var height = $('#height').val();
+			var weight = $('#weight').val();
+			
+			console.log('name : ' + name);
+			console.log('height : ' + height);
+			console.log('weight : ' + weight);
+			
+			$.ajax({
+				type: "post",
+				url : "/WebTest/bmi/bmi.do",
+				data : {
+					name : name,
+					height : height,
+					weight : weight
+				},
+				success : function (data) {
+					$('#result').html(data);
+				}
+			}); // $.ajax()
+		}); // click()
+	});
+</script>
+</head>
+<body>
+	<h3>BMI 지수 계산</h3>
+	<hr>
+	<!-- 프로젝트 명 + 가상 경로 : 서블릿에서는 가상 경로만 맵핑 -->
+	이름 : <input type="text" name="name" id="name"/> <br>
+	신장 : <input type="text" name="height" id="height"/> <br>
+	체중 : <input type="text" name="weight" id="weight"/> <br>
+	<input type="button" id="btnOk" value="확인" />
+	<hr>
+	<h3>BMI 결과</h3>
+	<div id="result">결과값</div>
+</body>
+</html>

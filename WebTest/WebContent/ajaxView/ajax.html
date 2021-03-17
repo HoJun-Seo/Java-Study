@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	// 페이지가 로딩되면 자동 수행 : $(document).ready(function(){...});
+	$(function () {
+		console.log('jQuery Ok...!!');
+		$('button').click(function () {
+			alert("첫번째 수행");
+			$('#target').load('read.txt');
+			alert("두번째 수행");
+			$('#p1').html("문단을 입력합니다.");
+			alert("세번째 수행");
+		});
+	});
+</script>
+<style type="text/css">
+</style>
+</head>
+<body>
+	<button>확인</button>
+</body>
+</html>

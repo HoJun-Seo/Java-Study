@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>동기처리와 비동기식 처리 비교</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$('btnOK').click(function () {
+			var dan = $('dan').val();
+			
+			// 비동기 형식을 요청
+			$.ajax({
+				type: "post", // 자료 전송방식
+				url: "ajax_result.jsp", // 요청 url 패턴
+				//data: "data="+dan,
+				data:{dan : dan},
+				success: function (data) {
+					$('#result').html(data);
+				} // 요청 정상처리 후, 결과값 응답처리
+				
+			}); // $.ajax();
+		}); // click()
+	});
+</script>
+</head>
+<body>
+	<h1>동기처리 방식</h1>
+	<form action="ajax_result.jsp" method="post">
+		단을 입력하세요 : 
+		<input type="number" name="dan" min="2" max="9">
+		<input type="submit" value="확인">
+	</form>
+	
+	<hr>
+	<h1>비동기 처리방식</h1>
+		단을 입력하세요 : 
+		<input type="number" id="dan" name="dan" min="2" max="9">
+		<input type="button" id="btnOk" value="확인" />
+		<div id="result">ajax 비동기처리 방식으로 결과값 출력</div>
+</body>
+</html>
+<!-- 
+jQuery Ajax 형식
+$.ajax({처리 내용});
+
+$.ajax({
+	type : "post" or "get",
+	async : "true" or "false",
+	url : 요청 url,
+	data : {서버로 전송할 데이터},
+	dataType : "서버에서 전송받을 데이터 형식",
+	success : {정상 요청, 응답시 처리},
+	error : function(xhr, status, error) {오류 발생시 처리},
+	complet : function(data, textStatus) {작업 완료 후 처리}
+});
+ -->
