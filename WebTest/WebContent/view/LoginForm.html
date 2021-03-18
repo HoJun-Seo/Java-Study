@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function fn_sendMember(){
+		console.log('click');
+		
+		var frmMember = document.frmMember;
+		var id = frmMember.id.value;
+		var pwd = frmMember.pwd.value;
+		
+		if(id.length == 0 || id == ""){
+			alert("아이디는 필수 입니다.");
+		} else if(pwd.length == 0 || pwd == ""){
+			alert("비밀 번호는 필수 입니다.");
+		} else {
+			frmMember.method = "post";
+			frmMember.action = "/WebTest/webTest/T_memService";
+			frmMember.submit();
+		}
+	}
+</script>
+</head>
+<body>
+	<h2>로그인</h2>
+	<form name="frmMember">
+		<table>
+			<th>로그인</th>
+			<tr>
+				<td>아이디</td>
+				<td><input type="text" name="id"></td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td><input type="password" name="pwd"></td>
+			</tr>
+		</table>
+		<input type="button" value="확인" onClick="fn_sendMember()" />
+		<input type="reset" value="다시 입력" />
+		<input type="hidden" name="command" value="LoginMember" />
+	</form>
+</body>
+</html>
