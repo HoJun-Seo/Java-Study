@@ -200,21 +200,21 @@ public class T_memDAO {
 		}
 	}
 
-	public boolean loginMember(String id, String pwd) {
-		boolean success = false;
+	public String loginMember(String id, String pwd) {
+		String result = "fail";
 		try {
 			con = dataFactory.getConnection();
 			
-			String sql = "select * from t_mem where id=? and pwd=?";
+			String sql = "select * from t_mem where id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.setString(2, pwd);
 			
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				if(rs.getString("id").equals(id) && rs.getString("pwd").equals(pwd)) {
-					success = true;
-				}
+				if(rs.getString("id").equals(id) && rs.getString("pwd").equals(pwd)) 
+					result = "success";
+				else if(rs.getString("id").equals(id) && !rs.getString("pwd").equals(pwd)) 
+					result = "Invalid Password";
 			}
 			
 			rs.close();
@@ -225,6 +225,6 @@ public class T_memDAO {
 			e.printStackTrace();
 		}
 		
-		return success;
+		return result;
 	}
 }

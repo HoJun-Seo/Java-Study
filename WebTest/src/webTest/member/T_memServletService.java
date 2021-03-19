@@ -97,9 +97,15 @@ public class T_memServletService extends HttpServlet {
 			String id = request.getParameter("id");
 			String pwd = request.getParameter("pwd");
 			
-			boolean success = dao.loginMember(id, pwd);
-			if(success == true) System.out.println("로그인 성공");
-			else {
+			String result = dao.loginMember(id, pwd);
+			if(result.equals("success")) System.out.println("로그인 성공");
+			else if(result.equals("Invalid Password")) {
+				System.out.println("잘못된 비밀번호 입니다.");
+				String page = "/WebTest/view/LoginForm.html";
+				response.sendRedirect(page);
+			}
+			else if(result.equals("fail")){
+				System.out.println("존재하지 않는 아이디 입니다.");
 				System.out.println("로그인 실패, 회원가입 페이지로 이동합니다.");
 				String page = "/WebTest/view/t_memberForm.html";
 				response.sendRedirect(page);
