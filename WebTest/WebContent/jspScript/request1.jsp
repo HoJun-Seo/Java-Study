@@ -13,6 +13,10 @@
 <body>
 <%
 	RequestDispatcher dispatch = request.getRequestDispatcher("request2.jsp");
+	dispatch.forward(request, response);
 %>
-</body>
+
+	이름 : <input type="text" name="name">
+	주소 : <input typr="text" name="address">
+</body> 
 </html>
