@@ -12,11 +12,10 @@
 </head>
 <body>
 <%
+	request.setAttribute("name", "홍길동");
+	request.setAttribute("address", "부산 광역시");
 	RequestDispatcher dispatch = request.getRequestDispatcher("request2.jsp");
 	dispatch.forward(request, response);
 %>
-
-	이름 : <input type="text" name="name">
-	주소 : <input typr="text" name="address">
 </body> 
 </html>

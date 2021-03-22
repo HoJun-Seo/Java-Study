@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>팝업창</title>
+<script type="text/javascript">
+	function setPopUpStart(obj) {
+		if(obj.checked == true){
+			// 체크가 되어있으면 팝업창 삭제
+			var expireDate = new Date();
+			// 현재 날짜의 월에 대한 다음달을 계산하여 설정
+			expireDate.setMonth(expireDate.getMonth()+1);
+			// 쿠키 업데이트
+			document.cookie = "notShowPop=" + "true" + ";path=/; expires="+expireDate.toGMTString();
+			window.close();
+			
+			
+		}
+	}
+</script>
+</head>
+<body>
+	<h4>알림 팝업창 입니다.</h4>
+	<hr>
+	<form action="">
+		<input type="checkbox" onClick="setPopUpStart(this)" />
+	</form>
+</body>
+</html>

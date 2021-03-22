@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>쿠키 이용해 팝업창 제한하기</title>
+<script type="text/javascript">
+	/* window.onload = function () {} */
+	
+	// 브라우저에 웹 페이지 로드될 때 pageLoad() 함수 호출
+	window.onload = pageLoad;
+	function pageLoad(){
+		// 자바 스크립트에서 생성한 쿠키 값을 읽어오면 
+		// notShowPop 에는 "false" 가 기억된다. 
+		notShowPop = getCookieValue();
+		if(notShowPop != "true"){
+			window.open("popUp.html", "pop", // 팝업창에 불러올 웹 페이지 이름과 윈도우 객체 이름
+					"width=400, height=500, " +  // 윈도우에 대한 옵션들
+					"resizeable=no, status=no, " +
+					"scrollbars=yes, menubar=no");
+		}
+	}
+	function getCookieValue() {
+		var result = "true";
+		cookie = document.cookie.split(";");
+		// 쿠키 값 분리
+		console.log("---- 쿠키 값 분리 ----");
+		console.log(cookie[0]);
+		console.log(cookie[1]);
+		console.log(cookie[2]);
+		
+		for (var i = 0; i < cookie.length; i++) {
+			element = cookie[i].split("=");
+			value=element[0];
+			// 정규식 활용 : 쿠키 이름 문자열의 공백(\s) 을 제거
+			value=value.replace(/^\s/,'');
+			if (value=='notShowPop') {
+				result = element[1];
+			}
+		}
+		
+		
+		return result;
+	}
+	function deleteCookie() {
+		// 자바 스크립트에서 쿠키값 설정
+		document.cookie = "notShowPop=" + "false" + ";path=/; expires=-1";
+	}
+	
+</script>
+</head>
+<body>
+	<h1>쿠키 활용한 팝업창 제한하기</h1>
+	<hr>
+	<form action="">
+		<input type="button" value="쿠키 삭제" onclick="deleteCookie()">
+	</form>
+</body>
+</html>

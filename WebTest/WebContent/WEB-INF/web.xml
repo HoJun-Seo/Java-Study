@@ -19,4 +19,24 @@
   	<servlet-name>first</servlet-name>
   	<url-pattern>/web01</url-pattern>
   </servlet-mapping>
+  
+    <servlet-mapping>
+  	<servlet-name>first</servlet-name>
+  	<url-pattern>/web02</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 세션 시간 : 분 단위처리, 숫자 1은 1분을 -->
+  <session-config>
+  	<session-timeout>1</session-timeout>
+  </session-config>
+  
+  <!-- 에러코드 처리 페이지 -->
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/error/404code.jsp</location>
+  </error-page>
+  <error-page>
+  	<error-code>500</error-code>
+  	<location>/error/500code.jsp</location>
+  </error-page>
 </web-app>
