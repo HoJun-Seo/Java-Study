@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>로그인 화면</title>
+<script type="text/javascript">
+	function fn_sendMember(){
+		
+		var frmMember = document.getElementById('frmMember');
+		var id = document.getElementById('id').value;
+		var pwd = document.getElementById('pwd').value;
+		
+		if(id.length == 0 || id == ""){
+			alert("아이디는 필수 입니다.");
+		} else if(pwd.length == 0 || pwd == ""){
+			alert("비밀 번호는 필수 입니다.");
+		} else{
+			frmMember.submit();
+		}
+	}
+</script>
+</head>
+<body>
+	<h2>로그인</h2>
+	<form action="/WebTest/MemberRegister/MemberServlet" method="post" id="frmMember">
+		<table>
+			<th>로그인</th>
+			<tr>
+				<td>아이디</td>
+				<td><input type="text" name="id" id="id"/></td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td><input type="password" name="pwd" id="pwd"/></td>
+			</tr>
+		</table>
+		<input type="button" value="로그인" onClick="fn_sendMember()"/>
+		<input type="reset" value="다시 입력" />
+		<a href="/WebTest/MemberRegisterView/CreateForm.jsp">회원가입</a>
+		<input type="hidden" name="command" value="LoginMember" />
+	</form>
+</body>
+</html>
