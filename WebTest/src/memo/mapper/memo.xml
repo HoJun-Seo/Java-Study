@@ -1,0 +1,21 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- db 자료와 자료 저장소(객체:DTP) 을 맵핑(mapping) -->
+<mapper namespace="memo">
+	<!-- id=sql 작업 구분 -->
+	<select id="list" resultType="memo.dto.MemoDTO">
+		select * from memo order by idx
+		
+	</select>
+	
+	<select id="insert" parameterType="memo.dto.MemoDTO">
+		insert into memo(idx, writer, memo)
+			values((select nvl(max(idx)+1, 1) from memo), #{writer}, #{memo})
+	</select>
+	
+	<select id="view" resultType="memo.dto.MemoDTO">
+		select * from memo where idx = ${idx}
+	</select>
+</mapper>
