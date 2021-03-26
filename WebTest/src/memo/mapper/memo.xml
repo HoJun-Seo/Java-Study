@@ -16,6 +16,14 @@
 	</select>
 	
 	<select id="view" resultType="memo.dto.MemoDTO">
-		select * from memo where idx = ${idx}
+		select * from memo where idx = #{idx}
 	</select>
+	
+	<update id="update" parameterType="memo.dto.MemoDTO">
+		update memo set writer = #{writer}, memo = #{memo} where idx = #{idx}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		delete from memo where idx = #{idx}
+	</delete>
 </mapper>

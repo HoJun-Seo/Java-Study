@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- db 자료와 자료 저장소(객체:DTP) 을 맵핑(mapping) -->
+<mapper namespace="survey">
+	<select id="view_question" resultType="survey.dto.SurveyDTO">
+		select * from survey where survey_idx = #{survey_idx}
+	</select>
+	<select id="viewAll_question" resultType="survey.dto.SurveyDTO">
+		select * from survey
+	</select>
+	<!-- 특정 문항에 대한 응답내용 테이블 저장 -->
+	<select id="insert_survey" parameterType="survey.dto.SurveyResultDTO">
+		insert into
+			survey_result
+		values
+			((select nvl(max(answer_idx) + 1, 1) from survey_result), #{survey_idx}, #{num})
+	</select>
+	<select id="list_summary" resultType="survey.dto.SurveySummerDTO">
+		select survey_idx, num, count(*) as sum_num,
+    		round((select count(*) from survey_result where survey_idx = s.survey_idx and num = s.num) / (select count(*) from survey_result where survey_idx = s.survey_idx) * 100, 2) as rate
+		from survey_result s
+		where survey_idx = #{survey_idx} <!-- 특정 문제번호 -->
+		group by survey_idx, num
+		order by survey_idx, num
+	</select>
+</mapper>

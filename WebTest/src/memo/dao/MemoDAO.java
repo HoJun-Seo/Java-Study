@@ -42,4 +42,20 @@ public class MemoDAO {
 		session.close();
 		return dto;
 	}
+
+	public void updateMemo(MemoDTO dto) {
+		SqlSession session = MybatisManager.getInstance().openSession();
+		
+		session.update("memo.update", dto);
+		session.commit();
+		session.close();
+	}
+
+	public void deleteMemo(int idx) {
+		SqlSession session = MybatisManager.getInstance().openSession();
+		
+		session.delete("memo.delete", idx);
+		session.commit();
+		session.close();
+	}
 }

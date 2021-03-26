@@ -24,9 +24,37 @@
 		
 		$('#btnUpdate').click(function () {
 			console.log('btnUpdate...');
+			
+			var writer = $('#writer').val();
+			var memo = $('#memo').val();
+			
+			if(writer.length === 0){
+				alert('이름을 입력하세요');
+				$('#writer').focus();
+				return;
+			}
+			if(memo.length === 0){
+				alert('메모 내용을 입력하세요');
+				$('#memo').focus();
+				return;
+			}
+			
+			document.form1.method = 'get';
+			// 전송할 url
+			document.form1.action = '${pageContext.request.contextPath}/memo_servlet/update.do';
+			// 전송
+			document.form1.submit();
 		});
 		$('#btnDelete').click(function () {
 			console.log('btnDelete...');
+			
+			if(confirm('삭제 하시겠습니까?')){
+				document.form1.method = 'get';
+				// 삭제 페이지 이동 url
+				document.form1.action = '${pageContext.request.contextPath}/memo_servlet/delete.do';
+				// 전송
+				document.form1.submit();
+			}
 		})
 	})
 	
@@ -34,7 +62,7 @@
 </head>
 <body>
 	<h2>메모글 보기</h2> <hr>
-	<form action="form1" name="form1" method="post">
+	<form action="" name="form1" method="post">
 		<table>	
 			<tr>
 				<td>작성자</td>

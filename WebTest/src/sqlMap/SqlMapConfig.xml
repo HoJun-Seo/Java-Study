@@ -16,5 +16,6 @@
   <!-- sql 관련 설정 -->
   <mappers>
     <mapper resource="memo/mapper/memo.xml"/>
+    <mapper resource="survey/mapper/survey.xml"/>
   </mappers>
 </configuration>

@@ -6,6 +6,9 @@ public class MemoDTO {
 	private String memo;
 	private String post_date;
 	
+	public MemoDTO() {
+	}
+	
 	public MemoDTO(String writer, String memo) {
 		super();
 		this.writer = writer;
