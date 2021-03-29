@@ -17,5 +17,6 @@
   <mappers>
     <mapper resource="memo/mapper/memo.xml"/>
     <mapper resource="survey/mapper/survey.xml"/>
+    <mapper resource="guestbook/mapper/guestbook.xml"/>
   </mappers>
 </configuration>
