@@ -10,7 +10,7 @@
 			from
 				(select eno, ename from test order by eno desc) a
 			)
-			where rn between 11 and 20
+			where rn between #{start} and #{end}
 	</select>
 	<!-- 레코드 전체 개수 -->
 	<select id="recordCount" resultType="int">

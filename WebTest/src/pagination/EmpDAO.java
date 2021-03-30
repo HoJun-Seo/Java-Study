@@ -27,7 +27,7 @@ public class EmpDAO {
 		map.put("start", start);
 		map.put("end", end);
 		
-		List<EmpDTO> list = session.selectList("emp.empList");
+		List<EmpDTO> list = session.selectList("emp.empList", map);
 		session.close();
 		
 		System.out.println("DAO list 처리완료");

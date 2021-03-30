@@ -60,6 +60,11 @@ public class MemberServlet extends HttpServlet {
 			String page = "/WebTest/MemberRegisterView/MemberLoginForm.html";
 			response.sendRedirect(page);
 		}
+		else if(command.equals("Agreement") && command != null) {
+			String page = "/MemberRegisterView/CreateForm.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(page);
+			rd.forward(request, response);
+		}
 	}
 
 	/**

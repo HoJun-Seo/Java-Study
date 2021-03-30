@@ -11,7 +11,7 @@
 	<h2>페이징 결과</h2>
 	<table>
 		<tr>
-			<td></td>
+			<td>NO</td>
 			<td>사원 번호</td>
 			<td>사원 이름</td>
 		</tr>
@@ -25,18 +25,14 @@
 		<tr>
 			<td colspan="3">
 				<c:if test="${curBlock > 1}">
-					<a href="${pageContextPath.request.contextPath}
-					/page_servlet/list.do?curPage=${prevPage}">[이전]</a>&nbsp;
+					<a href="${pageContext.request.contextPath}/page_servlet/list.do?curPage=${prevPage}">[이전]</a>
 				</c:if>
+				&nbsp;
 				<c:forEach var="i" begin="${blockStart}" end="${blockEnd}">
-					<a href="${pageContextPath.request.contextPath}
-					/page_servlet/list.do?curPage=${i}">
-					${i}
-					</a> &nbsp;
+					<a href="${pageContext.request.contextPath}/page_servlet/list.do?curPage=${i}">${i}</a>
 				</c:forEach>
 				<c:if test="${curBlock < totBlock}">
-					<a href="${pageContextPath.request.contextPath}
-					/page_servlet/list.do?curPage=${nextPage}">[다음]</a>&nbsp;
+					<a href="${pageContext.request.contextPath}/page_servlet/list.do?curPage=${nextPage}">[다음]</a>
 				</c:if>
 			</td>
 		</tr>
