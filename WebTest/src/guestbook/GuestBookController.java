@@ -101,6 +101,23 @@ public class GuestBookController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher(page);
 			rd.forward(request, response);
 		}
+		else if(url.contains("search.do")) {
+			// 검색 옵션
+			String searchkey = request.getParameter("searchkey");
+			// 검색 키워드
+			String search = request.getParameter("search");
+			System.out.println("검색옵션 : " + searchkey + ", 검색 키워드 : " + search);
+			
+			List<GuestBookDTO> items = dao.searchList(searchkey, search);
+			
+			request.setAttribute("list", items);
+			request.setAttribute("searchkey", searchkey);
+			request.setAttribute("search", search);
+			
+			String page = "/guestbook/list.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(page);
+			rd.forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

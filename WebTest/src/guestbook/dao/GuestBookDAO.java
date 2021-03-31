@@ -2,6 +2,7 @@ package guestbook.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -10,6 +11,27 @@ import sqlMap.MybatisManager;
 
 public class GuestBookDAO {
 	
+	// 조건 검색
+	public List<GuestBookDTO> searchList(String searchKey, String search){
+		SqlSession session = MybatisManager.getInstance().openSession();
+		
+		search = "%"+search+"%";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchKey", searchKey);
+		map.put("search", search);
+		
+		List<GuestBookDTO> searchlist;
+		if(searchKey.equals("name_content")) {
+			searchlist = session.selectList("guestbook.searchNameContent", search);
+		} else {
+			searchlist = session.selectList("guestbook.searchList", map);
+		}
+		
+		session.close();
+		return searchlist;
+	}
+	
+	//전체 조회
 	public List<GuestBookDTO> getList(){
 		//SqlSessionFactory 객체를 이용하여 SqlSession 객체를 생성
 		SqlSession session = MybatisManager.getInstance().openSession();

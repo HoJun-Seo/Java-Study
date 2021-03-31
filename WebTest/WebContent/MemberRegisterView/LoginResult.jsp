@@ -11,7 +11,9 @@
 <title>로그인 결과</title>
 </head>
 <body>
-	<h1><%=result %></h1>
-	<a href="/WebTest/MemberRegisterView/MemberLoginForm.html">돌아가기</a>
+	<script type="text/javascript">
+		alert('<%=result %>');
+		location.href="/WebTest/MemberRegisterView/MemberLoginForm.html";
+	</script>
 </body>
 </html>

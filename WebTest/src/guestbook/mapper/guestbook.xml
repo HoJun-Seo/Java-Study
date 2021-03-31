@@ -26,4 +26,13 @@
 	<select id="delete" parameterType="int">
 		delete from guestbook where idx = #{idx}
 	</select>
+	
+	<select id="searchList" resultType="guestbook.dto.GuestBookDTO">
+		select * from guestbook where ${searchkey} like #{search}
+	</select>
+	<select id="searchNameContent">
+		select * from guestbook
+			where name like #{search} or
+					content like #{search}
+	</select>
 </mapper>

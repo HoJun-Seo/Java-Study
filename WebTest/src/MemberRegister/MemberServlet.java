@@ -56,9 +56,16 @@ public class MemberServlet extends HttpServlet {
 			md.setName(name);
 			md.setRegister_number(RRN);
 			
-			dao.addMember(md);
-			String page = "/WebTest/MemberRegisterView/MemberLoginForm.html";
-			response.sendRedirect(page);
+			boolean confirm = dao.addMember(md);
+			if(confirm == true) {
+				String page = "/WebTest/MemberRegisterView/MemberLoginForm.html";
+				response.sendRedirect(page);
+			} else {
+				System.out.println("아이디 중복 확인");
+				String page = "/WebTest/MemberRegisterView/overlap_confirm.html";
+				response.sendRedirect(page);
+			}
+			
 		}
 		else if(command.equals("Agreement") && command != null) {
 			String page = "/MemberRegisterView/CreateForm.jsp";

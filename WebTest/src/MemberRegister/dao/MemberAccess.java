@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -68,27 +69,55 @@ public class MemberAccess {
 		return result;
 	}
 
-	public void addMember(MemberData md) {
+	public boolean addMember(MemberData md) {
+		boolean confirm = true;
 		try {
+			
+			
 			String id = md.getId();
 			String pwd = md.getPassword();
 			String name = md.getName();
 			String RRN = md.getRegister_number();
 			
-			con = dataFactory.getConnection();
-			
-			String sql = "insert into member_register(name,register_number,id,password) values(?,?,?,?)";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, name);
-			pstmt.setString(2, RRN);
-			pstmt.setString(3, id);
-			pstmt.setString(4, pwd);
-			
-			pstmt.executeUpdate(); // 입력, 수정, 삭제 => executeUpdate() 메소드 사용
-			pstmt.close();
-			
+			confirm = overlap_confirm(id);
+			if(confirm == true) {
+				con = dataFactory.getConnection();
+				
+				String sql = "insert into member_register(name,register_number,id,password) values(?,?,?,?)";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, name);
+				pstmt.setString(2, RRN);
+				pstmt.setString(3, id);
+				pstmt.setString(4, pwd);
+				
+				// 입력, 수정, 삭제 => executeUpdate() 메소드 사용
+				pstmt.executeUpdate();
+				pstmt.close();
+			}
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return confirm;
+	}
+
+	private boolean overlap_confirm(String id) {
+		boolean confirm = true;
+		try {
+			System.out.println("중복 확인 시작");
+			con = dataFactory.getConnection();
+			
+			String sql = "select * from member_register where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) confirm = false;
+			System.out.println("확인 결과 : " + confirm);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return confirm;
 	}
 }
