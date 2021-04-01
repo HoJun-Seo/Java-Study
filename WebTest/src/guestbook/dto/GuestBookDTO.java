@@ -49,7 +49,8 @@ public class GuestBookDTO {
 		return "GuestBookDTO [idx=" + idx + ", name=" + name + ", email=" + email + ", passwd=" + passwd + ", content="
 				+ content + ", post_date=" + post_date + "]";
 	}
-	public GuestBookDTO(String name, String email, String passwd, String content) {
+	public GuestBookDTO(int idx, String name, String email, String passwd, String content) {
+		this.idx = idx;
 		this.name = name;
 		this.email = email;
 		this.passwd = passwd;
