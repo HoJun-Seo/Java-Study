@@ -18,4 +18,42 @@ public class BoardDAO {
 		
 		return list;
 	}
+	// 게시글 저장 기능
+	public void insert(BoardDTO dto) {
+		SqlSession session = MybatisManager.getInstance().openSession();
+		session.insert("board.insert", dto);
+		session.commit(); // insert, update, delete 는 commit() 적용
+		session.close();
+	}
+	// 다운로드 횟수 처리
+	public void plusDown(int num) {
+		SqlSession session = MybatisManager.getInstance().openSession();
+		
+		session.update("board.plusDown", num);
+		session.commit();
+		session.close();
+	}
+	// 다운로드 파일 이름 추출
+	public String getFileName(int num) {
+		SqlSession session = MybatisManager.getInstance().openSession();
+		String result = session.selectOne("board.getFilename", num);
+		session.close();
+		
+		return result;
+	}
+	
+	public BoardDTO view(int num) {
+		SqlSession session = MybatisManager.getInstance().openSession();
+		BoardDTO dto = session.selectOne("board.view", num);
+		session.close();
+		
+		return dto;
+	}
+	
+	public void plusReadCount(int num) {
+		SqlSession session = MybatisManager.getInstance().openSession();
+		session.update("board.plusReadCount", num);
+		session.commit();
+		session.close();
+	}
 }
