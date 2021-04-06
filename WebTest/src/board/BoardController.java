@@ -18,6 +18,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import board.dao.BoardDAO;
+import board.dto.BoardCommentDTO;
 import board.dto.BoardDTO;
 import common.Constants;
 
@@ -175,6 +176,36 @@ public class BoardController extends HttpServlet {
 			String page = "/board/view.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(page);
 			rd.forward(request, response);
+		} else if(url.contains("comment_reply.do")) {
+			System.out.println("comment_reply.do 처리중....");
+			
+			int board_num = Integer.parseInt(request.getParameter("board_num"));
+			System.out.println("게시물 번호 : " + board_num);
+			
+			// 댓글 List 조회 요청
+			List<BoardCommentDTO> list = dao.commentList(board_num);
+//			System.out.println("댓글 : " + list.toString());
+			
+			// 댓글 내용을 저장해서 view 페이지에 전달
+			request.setAttribute("list", list);
+			
+			String page = "/board/comment_list.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(page);
+			rd.forward(request, response);
+		} else if(url.contains("comment_add.do")) {
+			System.out.println("comment_add.do 처리중...");
+			
+			// 인자로 넘어온 값을 dto 에 저장
+			BoardCommentDTO dto = new BoardCommentDTO();
+			// 게시글 번호
+			dto.setBoard_num(Integer.parseInt(request.getParameter("board_num")));
+			// 댓글 작성자
+			dto.setWriter(request.getParameter("writer"));
+			dto.setCotent(request.getParameter("content"));
+			
+			// 게시물 번호에 대한 댓글 내용 저장하기 요청
+			dao.commentAdd(dto);
+			
 		}
 		
 		

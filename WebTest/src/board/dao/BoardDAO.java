@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import board.dto.BoardCommentDTO;
 import board.dto.BoardDTO;
 import sqlMap.MybatisManager;
 
@@ -53,6 +54,25 @@ public class BoardDAO {
 	public void plusReadCount(int num) {
 		SqlSession session = MybatisManager.getInstance().openSession();
 		session.update("board.plusReadCount", num);
+		session.commit();
+		session.close();
+	}
+	
+	// 게시물 번호에 대한 댓글 목록 조회 요청
+	public List<BoardCommentDTO> commentList(int board_num){
+		SqlSession session = MybatisManager.getInstance().openSession();
+		
+		List<BoardCommentDTO> list = session.selectList("board.commentList", board_num);
+		session.close();
+		
+		return list;
+	}
+	
+	// 게시물 번호에 대한 댓글 내용 등록
+	public void commentAdd(BoardCommentDTO dto) {
+		SqlSession session = MybatisManager.getInstance().openSession();
+		
+		session.insert("board.commentAdd", dto);
 		session.commit();
 		session.close();
 	}

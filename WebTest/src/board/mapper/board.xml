@@ -35,4 +35,21 @@
 	<select id="plusReadCount" parameterType="int">
 		update board set readcount = readcount + 1 where num = #{num}
 	</select>
+	<!-- 게시물 번호에 대한 댓글 목록 조회 -->
+	<select id="commentList" resultType="board.dto.BoardCommentDTO">
+		select * from board_comment 
+		where board_num=#{board_num}
+		order by comment_num desc;
+	</select>
+	<!-- 게시물 번호에 대한 댓글 입력 -->
+	<select id="commentAdd">
+		insert into board_comment (comment_num, board_num, writer, content)
+			values
+			(
+			    (select nvl(max(comment_num)+1, 1) from board_comment),
+			    #{board_num},
+			    #{writer},
+			    #{content}
+			)
+	</select>
 </mapper>
