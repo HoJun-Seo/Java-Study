@@ -1,6 +1,8 @@
 package board.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -75,5 +77,38 @@ public class BoardDAO {
 		session.insert("board.commentAdd", dto);
 		session.commit();
 		session.close();
+	}
+	
+	// 게시물 비번 체크 : 게시물 번호, 게시물 비번
+	public String passwdCheck(int num, String passwd) {
+		SqlSession session = MybatisManager.getInstance().openSession();
+		// session 객체는 sql 식별값, 인자값 1개만 허용한다.
+		// 인자값이 두 개 이상인 경우 Map, DTO(VO) 같은 그룹으로 자료전달
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("num", num);
+		map.put("passwd", passwd);
+		
+		String result = session.selectOne("board.pass_check", map);
+		session.close();
+		
+		return result;
+	}
+	
+	public void update(BoardDTO dto) {
+		SqlSession session = MybatisManager.getInstance().openSession();
+		session.update("board.update", dto);
+		session.commit();
+		
+		session.close();
+	}
+	
+	// 게시물 삭제 (댓글 없는 게시물에만 적용)
+	public void delete(int num) {
+		SqlSession session = MybatisManager.getInstance().openSession();
+			
+		session.update("board.delete", num);
+		session.commit();
+
+		session.close();		
 	}
 }

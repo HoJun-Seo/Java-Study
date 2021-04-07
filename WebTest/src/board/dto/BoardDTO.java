@@ -23,6 +23,10 @@ public class BoardDTO {
 	private int filesize; 
 	private int down;
 	
+	// db에서 계산된 필드를 담아오는 멤버 변수
+	private int comment_count;
+	private int rn;
+	
 	// 추가 : 파일 확장자(실행파일 추출 : 악성코드 예방)
 	private String ext; // "txt"
 

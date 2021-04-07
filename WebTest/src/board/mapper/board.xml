@@ -6,7 +6,10 @@
 <mapper namespace="board">
 	<!-- 게시물 전체 리스트 -->
 	<select id="boardList" resultType="board.dto.BoardDTO">
-		select * from board order by num desc
+		select ROWNUM as rn, num, writer, subject, reg_date, readcount, filename, filesize, ref, re_step, re_level,
+			(select count(*) from board_comment where board_num = num) as comment_count
+		from board
+		order by num desc
 	</select>
 	<!-- 게시물 작성 -->
 	<select id="insert" parameterType="board.dto.BoardDTO">
@@ -39,7 +42,7 @@
 	<select id="commentList" resultType="board.dto.BoardCommentDTO">
 		select * from board_comment 
 		where board_num=#{board_num}
-		order by comment_num desc;
+		order by comment_num desc
 	</select>
 	<!-- 게시물 번호에 대한 댓글 입력 -->
 	<select id="commentAdd">
@@ -51,5 +54,29 @@
 			    #{writer},
 			    #{content}
 			)
+	</select>
+	
+	<select id="pass_check" resultType="String">
+		select passwd
+			from board
+			where num = #{num} and passwd = #{passwd}
+	</select>
+	
+	<select id="update">
+		update board
+			set
+				writer = #{writer},
+				subject = #{subject},
+				content = #{content},
+				filename = #{filename},
+				filesize = #{filesize},
+				down = #{down}
+			where
+				num = #{num}
+	</select>
+	
+	<!-- 특정 게시글 번호 삭제(댓글이 없는 게시글에 한함)  -->
+	<select id="delete">
+		delete from board where num = #{num}
 	</select>
 </mapper>

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게시물 작성</title>
-<link rel="stylesheet" href="css/style.css"> 
+<link rel="stylesheet" href="../board/css/style.css">
 </head>
 <body>
 	<h2>게시물 작성</h2>

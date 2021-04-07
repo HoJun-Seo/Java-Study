@@ -13,6 +13,6 @@ public class BoardCommentDTO {
 	private int comment_num;
 	private int board_num;
 	private String writer;
-	private String cotent;
+	private String content;
 	private Date reg_date;
 }

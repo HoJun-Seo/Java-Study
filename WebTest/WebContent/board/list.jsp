@@ -34,10 +34,15 @@
 		</tr>
 		<c:forEach var="dto" items="${list}">
 			<tr>
-				<td>${dto.num}</td>
+				<td>${dto.rn}</td>
 				<td>${dto.writer}</td>
 				<td> 
-					<a href="${path}/board_servlet/view.do?num=${dto.num}">${dto.subject}</a>
+					<a href="${path}/board_servlet/view.do?num=${dto.num}">
+						${dto.subject}
+						<c:if test="${dto.comment_count > 0 }">
+							(${dto.comment_count})
+						</c:if>
+					</a>
 				</td>
 				<td>${dto.reg_date}</td>
 				<td>${dto.readcount}</td>

@@ -54,31 +54,34 @@ public class BoardController extends HttpServlet {
 			
 			// 2. 전송할 값이 없을 경우
 			String page = "/board/write.jsp";
-			response.sendRedirect(request.getContextPath()+page);
+			RequestDispatcher rd = request.getRequestDispatcher(page);
+			rd.forward(request, response);
 		} else if(url.contains("insert.do")) {
 			System.out.println("insert.do 처리중....");
 			
 			// 폼에서 넘어온 인자 값을 보관하는 DTO 생성
 			BoardDTO dto = new BoardDTO();
 			
-			// 파일 업로드 기능
-			File uploadDir = new File(Constants.UPLOAD_PATH);
-			if(!uploadDir.exists()) {
-				// 폴더가 없으면 생성
-				uploadDir.mkdir();
-			}
-			// upload 라이브러리 사용하여 파일 업로드 처리 : cos.jar
-			MultipartRequest multi = new MultipartRequest(request,
-					Constants.UPLOAD_PATH,
-					Constants.MAX_UPLOAD,
-					"utf-8",
-					new DefaultFileRenamePolicy()
-				);
-			
-			String filename = "";
-			int filesize = 0;
 
 			try {
+				
+				// 파일 업로드 기능
+				File uploadDir = new File(Constants.UPLOAD_PATH);
+				if(!uploadDir.exists()) {
+					// 폴더가 없으면 생성
+					uploadDir.mkdir();
+				}
+				// upload 라이브러리 사용하여 파일 업로드 처리 : cos.jar
+				MultipartRequest multi = new MultipartRequest(request,
+						Constants.UPLOAD_PATH,
+						Constants.MAX_UPLOAD,
+						"utf-8",
+						new DefaultFileRenamePolicy()
+					);
+				
+				String filename = "";
+				int filesize = 0;
+				
 				Enumeration files = multi.getFileNames();
 				// 요소가 있는지 유무 체크, 있으면 반복문 처리
 				while(files.hasMoreElements()) {
@@ -163,6 +166,7 @@ public class BoardController extends HttpServlet {
 		}
 		else if(url.contains("view.do")) {
 			System.out.println("view.do 처리중...");
+			String message = request.getParameter("message");
 			
 			int num = Integer.parseInt(request.getParameter("num"));
 			
@@ -172,6 +176,7 @@ public class BoardController extends HttpServlet {
 			// 상세 페이지에 넣을 게시글 내용 읽기
 			BoardDTO dto = dao.view(num);
 			request.setAttribute("dto", dto);
+			request.setAttribute("message", message);
 			
 			String page = "/board/view.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(page);
@@ -201,17 +206,186 @@ public class BoardController extends HttpServlet {
 			dto.setBoard_num(Integer.parseInt(request.getParameter("board_num")));
 			// 댓글 작성자
 			dto.setWriter(request.getParameter("writer"));
-			dto.setCotent(request.getParameter("content"));
+			dto.setContent(request.getParameter("content"));
 			
 			// 게시물 번호에 대한 댓글 내용 저장하기 요청
 			dao.commentAdd(dto);
 			
+		} else if(url.contains("passwd_check.do")) {
+			System.out.println("passwd_check.do 처리 중...");
+			
+			int num = Integer.parseInt(request.getParameter("num"));
+			String passwd = request.getParameter("passwd");
+			
+			// 인자로 넘어온 비번, 게시물 번호 체크
+			String result = dao.passwdCheck(num, passwd);
+			
+			String page ="";
+			if(result != null) {
+				// 비번 일치 : 수정, 삭제
+				request.setAttribute("dto", dao.view(num));
+				
+				page ="/board/edit.jsp";
+				RequestDispatcher rd = request.getRequestDispatcher(page);
+				rd.forward(request, response);
+			} else {
+				// 비번 불일치 : 에러 메시지 전달
+				page = request.getContextPath() + "/board_servlet/view.do?num=" + num + "&message=error";
+				response.sendRedirect(page);
+			}
+		} else if(url.contains("update.do")) {
+			System.out.println("passwd_check.do 처리중...");
+			
+			int num = Integer.parseInt(request.getParameter("num"));
+			String passwd = request.getParameter("passwd");
+			
+			System.out.println("비번:"+passwd+",게시물번호:"+num);
+			
+			// 인자로 넘어온 비번, 게시물 번호 체크
+			String result = dao.passwdCheck(num, passwd);
+			System.out.println("passwd check result: "+result);
+			
+			String page = "";
+			
+			if (result != null) {
+				// 비번 일치 : 수정, 삭제 작업을 처리
+				request.setAttribute("dto", dao.view(num));
+				
+				page = "/board/edit.jsp";
+				RequestDispatcher rd = request.getRequestDispatcher(page);
+				rd.forward(request, response);
+			} else {
+				// 비번 불일치: 에러메시지 전달
+				page = request.getContextPath()+
+						"/board_servlet/view.do?num="+num+"&message=error";
+				response.sendRedirect(page);
+			}// if()
+			
+		} else if (url.contains("update.do")) {
+			System.out.println("update.do 처리중...");
+			
+			// command=1: 수정처리, command=2: 삭제처리
+			int command = Integer.parseInt(request.getParameter("command"));
+			
+			// 폼에서 넘어온 인자 값을 보관하는 DTO생성
+			BoardDTO dto = new BoardDTO();
+			
+			// ----------------------- //
+			// 파일 업로드 기능
+			// ----------------------- //
+			try {
+				
+					//File uploadDir = new File("c:/upload_test");
+					File uploadDir = new File(Constants.UPLOAD_PATH);
+					if (!uploadDir.exists()) {
+						// 폴더가 없으면 생성
+						uploadDir.mkdir();
+					}
+					
+					// upload 라이브러리 사용하여 파일 업로드 처리: cos.jar
+					MultipartRequest multi = new MultipartRequest(
+							request, 
+							Constants.UPLOAD_PATH,
+							Constants.MAX_UPLOAD,
+							"utf-8",
+							new DefaultFileRenamePolicy()
+							);
+				
+					// 파일이름 , 파일 사이즈 기본값 설정
+					String filename ="";
+					int filesize = 0;
+				
+					Enumeration files = multi.getFileNames();
+					while(files.hasMoreElements()) {
+						String file1 = (String) files.nextElement();
+						filename = multi.getFilesystemName(file1);
+						File f1 = multi.getFile(file1);
+						if (f1 != null) filesize = (int)f1.length();
+						System.out.println("filesize: "+filesize);
+					}// while()					
+				
+					// 폼에 작성한 내용(인자값) 받아서 dto저장
+					// 게시물 번호 
+					int num = Integer.parseInt(multi.getParameter("num"));
+					// 비번
+					String passwd = multi.getParameter("passwd");
+					
+					String writer = multi.getParameter("writer");
+					String subject = multi.getParameter("subject");
+					String content = multi.getParameter("content");
+					String ip = request.getRemoteAddr();
+					
+					
+					dto.setNum(num);
+					dto.setWriter(writer);
+					dto.setSubject(subject);
+					dto.setContent(content);
+					dto.setPasswd(passwd);
+					dto.setIp(ip);
+					
+					if (filename == null || filename.equals("")) {
+						
+						// 수정폼에서 첨부파일내용이 없으면 입력시에 저장된 파일정보를 수정에서
+						// 그대로 사용
+						BoardDTO dto2 = dao.view(num);
+						
+						String fName = dto2.getFilename();
+						int fSize = dto2.getFilesize();
+						int fDown = dto2.getDown();
+						
+						dto.setFilename(fName);
+						dto.setFilesize(fSize);
+						dto.setDown(fDown);
+						
+					} else {
+						// 수정폼에서 넘어온 파일이름, 파일크기 정보를 dto에 저장
+						dto.setFilename(filename);
+						dto.setFilesize(filesize);
+					}
+					
+					//------------------------------- //
+					// 수정 전 비밀 번호 체크 후 처리
+					//------------------------------- //
+					
+					String result = dao.passwdCheck(num, passwd);
+					String page ="";
+					
+					if (result != null) {
+						
+						// 비번 일치 : db 수정,삭제
+						if (command==1) {
+							// 수정 처리
+							dao.update(dto);
+						} else if (command==2) {
+							// 삭제처리
+							dao.delete(num);
+						}
+						
+						page = request.getContextPath()+ "/board_servlet/list.do";
+						response.sendRedirect(page);
+						
+					} else {
+						// 비번 불일치 : 에러 메시지 처리
+						request.setAttribute("dto", dto);
+						
+						page = "/board/edit.jsp?passwd_error=y";
+						RequestDispatcher rd = request.getRequestDispatcher(page);
+						rd.forward(request, response);
+						
+					}
+					
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}// try()
+			
+			System.out.println("dto : "+dto.toString());				
+		} else if(url.contains("delete.do")) {
+			System.out.println("delete.do 처리 중...");
 		}
-		
-		
 	} 
 	
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
