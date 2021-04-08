@@ -38,6 +38,10 @@
 				<td>${dto.writer}</td>
 				<td> 
 					<a href="${path}/board_servlet/view.do?num=${dto.num}">
+						<c:forEach var="i" begin="1" end="${dto.re_level }">&nbsp;</c:forEach>
+						<c:if test="${dto.re_level != 0 }">
+							<img src="${path}/board/images/천구의 결합6.png" width="15px" />
+						</c:if>
 						${dto.subject}
 						<c:if test="${dto.comment_count > 0 }">
 							(${dto.comment_count})

@@ -383,6 +383,84 @@ public class BoardController extends HttpServlet {
 			System.out.println("dto : "+dto.toString());				
 		} else if(url.contains("delete.do")) {
 			System.out.println("delete.do 처리 중...");
+		} else if(url.contains("reply.do")) {
+			System.out.println("reply.do 처리 중..");
+			
+			// 원글 게시물 번호 받아옴
+			int num = Integer.parseInt(request.getParameter("num"));
+			
+			// 원글 게시물 기본 정보 db 요청
+			BoardDTO dto = dao.view(num);
+			dto.setContent("==== 게시물 내용 ====\n" + dto.getContent());
+			
+			// 답글 작성하기로 보냄
+			request.setAttribute("dto", dto);
+			String page = "/board/reply.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(page);
+			rd.forward(request, response);
+			
+			// 게시물 작성 원리와 동일
+		} else if(url.contains("insertReply.do")) {
+			System.out.println("insertReply.do");
+			
+			int num = Integer.parseInt(request.getParameter("num"));
+			
+			BoardDTO dto = dao.view(num);
+			System.out.println("원글 계층구조" + dto.getNum() + 
+					", ref : " + dto.getRef() + ", re_step : " + dto.getRe_step() + 
+					", re_level : " + dto.getRe_level());
+			
+			// 원글의 계층번호 구조를 참조하여 답글에 대한 계층번호 설정
+			// 원글 ref(원글에 대한 그룹)
+			int ref = dto.getRef();
+			// 원글 계층번호 보다 순서 1단계 아래로 설정
+			int re_step = dto.getRe_step() + 1;
+			// 원글 계층번호 보다 level 을 1단곌 깊게 설정
+			int re_level = dto.getRe_level() + 1;
+			
+			// 게실물 작성 원리와 동일
+			String writer = request.getParameter("writer");
+			String subject = request.getParameter("subject");
+			String content = request.getParameter("content");
+			String passwd = request.getParameter("passwd");
+			
+			dto.setWriter(writer);
+			dto.setSubject(subject);
+			dto.setContent(content);
+			dto.setPasswd(passwd);
+			
+			dto.setRef(ref);
+			dto.setRe_step(re_step);
+			dto.setRe_level(re_level);
+			
+			// 첨부파일 관련 정보는 기본값으로 설정
+			dto.setFilename("-");
+			dto.setFilesize(0);
+			dto.setDown(0);
+			
+			// 1. 답변글에 대한 출력 순번 조정
+			// (같은 그룹의 기존 게시물은 +1 로 모두 update 처리해야함)
+			dao.updateStep(ref, re_step);
+			
+			// 2. 답글 내용 db에 저장
+			dao.reply(dto);
+			
+			response.sendRedirect(
+					request.getContextPath() +
+					"/board_servlet/list.do");
+		}
+		else if(url.contains("searchList.do")) {
+			
+			String searcch_option = request.getParameter("search_option");
+			String keyword = request.getParameter("keyword");
+			
+			// 키워드 통한 검색(필터링)
+			List<BoardDTO> list = dao.searchList(searcch_option, keyword);
+			request.setAttribute("list", list);
+			
+			String page = "/board/list.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(page);
+			rd.forward(request, response);
 		}
 	} 
 	

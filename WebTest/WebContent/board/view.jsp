@@ -145,6 +145,20 @@
 				}
 			});
 		});
+		
+		$('#btnReply').click(function () {
+			console.log('reply');
+			
+			document.form1.action = "${path}/board_servlet/reply.do";
+			document.form1.submit();
+		});
+		
+		$('#btnList').click(function () {
+			console.log('reply');
+			
+			document.form1.action = "${path}/board_servlet/list.do";
+			document.form1.submit();
+		});
 	});
 	// 게시물 번호에 대한 댓글 목록 조회 기능 요청
 	function commen_list() {

@@ -111,4 +111,36 @@ public class BoardDAO {
 
 		session.close();		
 	}
+	// 답글(같은 글의 그룹) 에 대한 출력 순번 조정
+	public void updateStep(int ref, int re_step) {
+		SqlSession session = MybatisManager.getInstance().openSession();
+		
+		// Mybatis 에서는 인자를 2개 이상 전달시 dto 또는 hashmap 처럼 묶어서 전달 시켜준다.
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("ref", ref);
+		map.put("re_step", re_step);
+		
+		session.update("board.updateStep", map);
+		session.commit();
+	}
+	
+	public void reply(BoardDTO dto) {
+		SqlSession session = MybatisManager.getInstance().openSession();
+		
+		session.insert("board.reply", dto);
+		session.commit();
+		session.close();
+	}
+	public List<BoardDTO> searchList(String searcch_option, String keyword) {
+		SqlSession session = MybatisManager.getInstance().openSession();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyword", "%" + keyword + "%");
+		map.put("search_option", searcch_option);
+		
+		List<BoardDTO> list = session.selectList("board.searchList", map);
+		session.close();
+				
+		return list;
+	}
 }
