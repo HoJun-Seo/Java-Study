@@ -66,7 +66,7 @@
 	<table id="reply_table">
 		<tr>
 			<td>
-				<input type="text" idd="writer" placeholder="이름" />
+				<input type="text" id="writer" placeholder="이름" />
 				<input type="password" name="comment_passwd" placeholder="">
 			</td>
 			<td rowspan="2">
@@ -113,7 +113,7 @@
 				alert('이름을 입력 해주세요');
 				$('#writer').focus();
 				return;
-			} else if(('#content').val().length == 0) {
+			} else if($('#content').val().length == 0) {
 				alert('댓글을 입력해주세요');
 				$('#content').focus();
 				return;

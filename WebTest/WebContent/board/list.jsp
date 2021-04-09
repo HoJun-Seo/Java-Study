@@ -2,7 +2,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file='../include/board_header.jsp' %>
+<%@ include file='../include/board_header_jstl.jsp' %>    
+<%@ include file='../include/board_header_cssjs.jsp' %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,8 +22,20 @@
 <body>
 	<h2>게시물 목록</h2>
 	<hr>
+	<!-- 검색 폼 -->
+	<form action="${path }/board_servlet/searchList.do">
+		<select name="search_option" id="">
+			<option value="writer">이름</option>
+			<option value="subject">제목</option>
+			<option value="content">본문</option>
+			<option value="all">이름+제목+본문</option>
+		</select>
+		<input type="text" name="keyword" />
+		<input type="submit" value="조회" />
+	</form>
 	<button id="btnWrite">글쓰기</button>
-	<table border="1" width="600px">
+	<div id="board_list_table">
+		<table border="1" width="600px">
 		<tr>
 			<td>번호</td>
 			<td>이름</td>
@@ -65,7 +78,22 @@
 				<td>${dto.down}</td>
 			</tr>
 		</c:forEach>
-		
-	</table>
+		<tr>
+			<td colspan="3">
+				<c:if test="${curBlock > 1}">
+					<a href="${pageContext.request.contextPath}/board_servlet/list.do?curPage=${prevPage}">[이전]</a>
+				</c:if>
+				&nbsp;
+				<c:forEach var="i" begin="${blockStart}" end="${blockEnd}">
+					<a href="${pageContext.request.contextPath}/board_servlet/list.do?curPage=${i}">${i}</a>
+				</c:forEach>
+				<c:if test="${curBlock < totBlock}">
+					<a href="${pageContext.request.contextPath}/board_servlet/list.do?curPage=${nextPage}">[다음]</a>
+				</c:if>
+			</td>
+		</tr>
+		</table>
+	</div>
+	<div id="page_nav"></div>
 </body>
 </html>

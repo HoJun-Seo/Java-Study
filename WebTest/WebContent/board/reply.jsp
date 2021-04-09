@@ -58,36 +58,36 @@
 			console.log('확인 버튼');
 			
 			//항목에 대한 값의 유효성 검사
-			var writer = $('writer').val();
-			var subject = $('subject').val();
-			var content = $('content').val();
-			var passwd = $('passwd').val();
+			var writer = $('#writer').val();
+			var subject = $('#subject').val();
+			var content = $('#content').val();
+			var passwd = $('#passwd').val();
 			
 			if(writer == ""){
 				alert('이름을 입력하세요');
-				$('writer').focus();
+				$('#writer').focus();
 				return;
 			}
 			if(subject === ""){
 				alert('제목을 입력하세요');
-				$('subject')focus();
+				$('#subject').focus();
 				return;
 			}
 			if(content === ""){
 				alert('내용을 입력하세요');
-				$('content')focus();
+				$('#content').focus();
 				return;
 			}
 			if(passwd === ""){
 				alert('비밀번호를 입력하세요');
-				$('passwd')focus();
+				$('#passwd').focus();
 				return;
 			}
 			
 			document.form1.action="${path}/board_servlet/insertReply.do";
 			document.form1.submit();
 		});
-		$('btnList').click(function () {
+		$('#btnList').click(function () {
 			console.log('list');
 			
 			location.href="${path}/board_servlet/list.do";

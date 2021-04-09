@@ -21,6 +21,7 @@ import board.dao.BoardDAO;
 import board.dto.BoardCommentDTO;
 import board.dto.BoardDTO;
 import common.Constants;
+import pagination.EmpDAO;
 
 
 @WebServlet("/board_servlet/*")
@@ -35,10 +36,57 @@ public class BoardController extends HttpServlet {
 		
 		// 클라이언트로 부터 요청한 url 을 분석하여 조건에 맞게 처리
 		if(url.contains("list.do")) {
+			
+			
+			// --- 페이지에 대한 레코드 범위 계산
+			int curPage = 1; // 현재 페이지
+			if(request.getParameter("curPage") != null) {
+				curPage = Integer.parseInt(request.getParameter("curPage"));
+			}
+			// 전체 페이지 계산 : 1페이지 10개의 레코드
+			int page_scale = 10; 
+			
+			int totCount = dao.recordCount();
+			int totPage = (int)Math.ceil((totCount)*1.0/page_scale); // 소수점 이하 있으면 자리 올림
+			System.out.println("총 레코드 수 : " + totCount + ", 총 페이지 수 : " + totPage);
+			
+			// 레코드 시작 번호, 마지막 번호(페이지 별로 구분)
+			int start = (curPage-1)*page_scale+1; //(1-1)*10+1 => 1
+			int end = start+page_scale-1; 
+						
+			// ---- 페이지 블록 갯수 : 1 블럭에 표시할 페이지 수 계산
+			// 1 블럭에 보여질 페이지 갯수(묶음) : ex) 1 블럭 10페이지 단위로 표시
+			int block_scale = 10;
+			// 블럭의 총 갯수 계산 : 전체 페이지 / 1 블럭에 보여질 페이지 수
+			int tot_block = (int)Math.ceil(totPage*1.0/block_scale);
+					
+			//현재 페이지에 대한 블럭 범위의 계산
+			int cur_block = (int)Math.ceil((curPage-1)/block_scale)+1;
+			int block_start = (cur_block-1) * block_scale+1; // 블럭의 시작 페이지 번호
+			int block_end = block_start + block_scale-1; // 블럭의 끝 페이지 번호
+						
+			// 페이지 블럭에서 이전, 다음 표시 여부 계산 : 첫 블럭에서 이전 표시 안함, 마지막 블럭에서는 다음 표시안함
+			//현재 블럭의 마지막 번호가 전체 페이지 마지막 번호 보다 크면 현재 마지막 블럭 번호를 마지막 페이지 번호로 설정
+			int prev_page = (cur_block-2) * block_scale + 1; // 이전 블럭 시작 페이지 계산
+			int next_page = (cur_block * block_scale) + 1;
+						
+			System.out.println("이전 블럭 시작페이지 번호 : " + prev_page +
+					", 현재 블럭 시작페이지 번호 : " + ((cur_block-1) * block_scale + 1));
+			System.out.println("다음 블럭 시작페이지 번호 : " + next_page + 
+					", 현재 블럭 시작페이지 번호 : " + ((cur_block-1) * block_scale + 1));
+			
 			//db 요청 처리하여 결과값 반환하여 저장
-			List<BoardDTO> list = dao.boardList();
+			List<BoardDTO> list = dao.boardList(start, end);
 			// 뷰 페이지에 결과값을 전송하기 위해 request 에 자료보관
 			request.setAttribute("list", list);
+			request.setAttribute("totPage", totPage);
+			request.setAttribute("totBlock", tot_block);
+			request.setAttribute("curBlock", cur_block);
+			request.setAttribute("blockStart", block_start);
+			request.setAttribute("blockEnd", block_end);
+			request.setAttribute("prevPage", prev_page);
+			request.setAttribute("nextPage", next_page);
+			
 			String page = "/board/list.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(page);
 			rd.forward(request, response);
@@ -381,9 +429,7 @@ public class BoardController extends HttpServlet {
 			}// try()
 			
 			System.out.println("dto : "+dto.toString());				
-		} else if(url.contains("delete.do")) {
-			System.out.println("delete.do 처리 중...");
-		} else if(url.contains("reply.do")) {
+		}  else if(url.contains("reply.do")) {
 			System.out.println("reply.do 처리 중..");
 			
 			// 원글 게시물 번호 받아옴
