@@ -36,7 +36,7 @@
 	<h1>비동기 처리방식</h1>
 		단을 입력하세요 : 
 		<input type="number" id="dan" name="dan" min="2" max="9">
-		<input type="button" id="btnOk" value="확인" />
+		<input type="button" id="btnOK" value="확인" />
 		<div id="result">ajax 비동기처리 방식으로 결과값 출력</div>
 </body>
 </html>
@@ -52,6 +52,6 @@ $.ajax({
 	dataType : "서버에서 전송받을 데이터 형식",
 	success : {정상 요청, 응답시 처리},
 	error : function(xhr, status, error) {오류 발생시 처리},
-	complet : function(data, textStatus) {작업 완료 후 처리}
+	complete : function(data, textStatus) {작업 완료 후 처리}
 });
  -->
